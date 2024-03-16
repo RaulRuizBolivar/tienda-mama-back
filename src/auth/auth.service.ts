@@ -36,18 +36,21 @@ export class AuthService {
   async login(loginDto: LoginDto) {
     const user = await this.usersService.findOneByEmail(loginDto.email);
 
+    if (!user?.password || !user.email)
+      throw new UnauthorizedException('Authentication failed');
+
     const isPasswordValid = await bcryptjs.compare(
       loginDto.password,
       user.password,
     );
 
-    if (!isPasswordValid || !user.email) {
+    if (!isPasswordValid) {
       throw new UnauthorizedException('Authentication failed');
     }
 
-    const payLoad = { email: user.email, isAdmin: user.isAdmin };
+    const payload = { email: user.email, isAdmin: user.isAdmin };
 
-    const token = await this.jwtService.signAsync(payLoad);
+    const token = await this.jwtService.signAsync(payload);
 
     const email = user.email;
 
