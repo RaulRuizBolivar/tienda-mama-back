@@ -45,7 +45,7 @@ export class AuthService {
       throw new UnauthorizedException('Authentication failed');
     }
 
-    const payLoad = { email: user.email, role: user.role };
+    const payLoad = { email: user.email, isAdmin: user.isAdmin };
 
     const token = await this.jwtService.signAsync(payLoad);
 

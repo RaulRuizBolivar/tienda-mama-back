@@ -9,7 +9,7 @@ import { jwtConfig } from 'auth/config/jwt.config';
 import { Request } from 'express';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class IsAdminGuard implements CanActivate {
   constructor(private readonly jwtService: JwtService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException();
     }
 
-    return true;
+    return request['user'].isAdmin;
   }
 
   private extractTokenFromHeader(request: Request): string | undefined {

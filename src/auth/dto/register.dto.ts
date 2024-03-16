@@ -1,6 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsEmail, IsString, MinLength } from 'class-validator';
-import { Role } from 'types/role.type';
+import { IsBoolean, IsEmail, IsString, MinLength } from 'class-validator';
 
 export class RegisterDto {
   @IsEmail()
@@ -11,6 +10,6 @@ export class RegisterDto {
   @MinLength(6)
   password: string;
 
-  @IsString()
-  role: Role;
+  @IsBoolean()
+  isAdmin: boolean;
 }

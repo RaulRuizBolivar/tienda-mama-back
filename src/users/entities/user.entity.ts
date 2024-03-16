@@ -5,7 +5,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Role } from 'types/role.type';
 
 @Entity({ name: 'users' })
 export class User {
@@ -21,8 +20,8 @@ export class User {
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @Column({ default: false })
-  role: Role;
+  @Column({ type: 'boolean', default: false })
+  isAdmin: boolean;
 
   // Logical remove
   @DeleteDateColumn()
