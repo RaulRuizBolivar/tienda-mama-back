@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { isAdmin } from './decorators/isAdmin.decorator';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { IsAdminGuard } from './guard/isAdmin.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -19,7 +19,7 @@ export class AuthController {
   }
 
   @Get('prueba')
-  @UseGuards(IsAdminGuard)
+  @isAdmin()
   prueba() {
     return 'prueba';
   }
