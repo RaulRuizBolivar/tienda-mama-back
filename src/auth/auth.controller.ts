@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
+import { isAdmin } from '../common/decorators/isAdmin.decorator';
 import { AuthService } from './auth.service';
-import { isAdmin } from './decorators/isAdmin.decorator';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 
