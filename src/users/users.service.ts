@@ -13,7 +13,7 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     const newUser = this.userRepository.create({
       ...createUserDto,
-      isAdmin: Boolean(createUserDto.isAdmin),
+      role: createUserDto.role,
     });
 
     return this.userRepository.save(newUser);

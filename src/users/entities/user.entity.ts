@@ -5,6 +5,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Role } from 'types/role.type';
 
 @Entity({ name: 'users' })
 export class User {
@@ -20,15 +21,15 @@ export class User {
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @Column({ type: 'boolean', default: false })
-  isAdmin: boolean;
+  @Column({ default: false })
+  role: Role;
 
   // Logical remove
   @DeleteDateColumn()
   deletedAt: Date;
 
   @BeforeInsert()
-  beforeInsertActiones() {
+  beforeInsertActions() {
     this.createdAt = new Date(Date.now());
   }
 }
