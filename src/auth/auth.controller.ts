@@ -1,5 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { isAdmin } from '../common/decorators/isAdmin.decorator';
+import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
@@ -16,11 +15,5 @@ export class AuthController {
   @Post('register')
   register(@Body() registerDto: RegisterDto) {
     return this.authService.register(registerDto);
-  }
-
-  @Get('prueba')
-  @isAdmin()
-  prueba() {
-    return 'prueba';
   }
 }
