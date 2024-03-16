@@ -45,13 +45,9 @@ export class AuthService {
       throw new UnauthorizedException('Authentication failed');
     }
 
-    console.log(user); // TODO delete
-
     const payLoad = { email: user.email, role: user.role };
 
     const token = await this.jwtService.signAsync(payLoad);
-
-    console.log(token); // TODO delete
 
     const email = user.email;
 

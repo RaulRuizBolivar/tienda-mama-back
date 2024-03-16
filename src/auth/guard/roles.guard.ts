@@ -11,9 +11,16 @@ export class RolesGuard implements CanActivate {
       context.getClass(),
     ]);
 
-    console.log(role); // TODO delete
-
     if (!role) return false;
-    return true;
+
+    const { user } = context.switchToHttp().getRequest();
+
+    console.log({
+      role: role,
+      'user.role': user.role,
+      areSame: role === user.role,
+    }); // TODO delete
+
+    return role === user.role;
   }
 }
