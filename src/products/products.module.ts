@@ -2,8 +2,7 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { jwtConfig } from 'auth/config/jwt.config';
-import { CampaignService } from './campaign.service';
-import { Campaign } from './entities/campaign.entity';
+import { CampaignsModule } from 'campaigns/campaigns.module';
 import { Image } from './entities/image.entity';
 import { Product } from './entities/product.entity';
 import { ImageService } from './image.service';
@@ -13,9 +12,10 @@ import { ProductsService } from './products.service';
 @Module({
   imports: [
     JwtModule.registerAsync(jwtConfig),
-    TypeOrmModule.forFeature([Product, Image, Campaign]),
+    TypeOrmModule.forFeature([Product, Image]),
+    CampaignsModule,
   ],
   controllers: [ProductsController],
-  providers: [ProductsService, ImageService, CampaignService],
+  providers: [ProductsService, ImageService],
 })
 export class ProductsModule {}

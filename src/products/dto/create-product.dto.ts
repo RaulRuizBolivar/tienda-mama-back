@@ -1,5 +1,5 @@
-import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
-import { Campaign } from 'products/entities/campaign.entity';
+import { Transform } from 'class-transformer';
+import { IsArray, IsNumber, IsString } from 'class-validator';
 import { CreateImageDto } from './create-image.dto';
 
 export class CreateProductDto {
@@ -19,8 +19,6 @@ export class CreateProductDto {
   images: CreateImageDto[];
 
   @IsString()
+  @Transform((param) => param.value.toLowerCase())
   campaign_name: string;
-
-  @IsOptional()
-  campaign: Campaign;
 }

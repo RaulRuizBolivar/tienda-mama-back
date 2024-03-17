@@ -7,7 +7,7 @@ export const jwtConfig: JwtModuleAsyncOptions = {
     return {
       global: true,
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '1d' },
+      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN },
     };
   },
 };

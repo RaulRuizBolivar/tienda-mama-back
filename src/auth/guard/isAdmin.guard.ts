@@ -17,6 +17,8 @@ export class IsAdminGuard implements CanActivate {
 
     const token = this.extractTokenFromHeader(request);
 
+    console.log(token); // TODO delete
+
     if (!token) throw new UnauthorizedException();
 
     try {
@@ -27,10 +29,11 @@ export class IsAdminGuard implements CanActivate {
 
       request['user'] = payload;
     } catch {
+      console.log(request['user']); // TODO delete
       throw new UnauthorizedException();
     }
 
-    return request['user'].isAdmin;
+    return Boolean(request['user']?.isAdmin);
   }
 
   private extractTokenFromHeader(request: Request): string | undefined {

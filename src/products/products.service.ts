@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CampaignService } from './campaign.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
@@ -14,7 +13,6 @@ export class ProductsService {
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
     private readonly imageService: ImageService,
-    private readonly campaignService: CampaignService,
   ) {}
 
   async create(createProductDto: CreateProductDto) {
@@ -24,13 +22,6 @@ export class ProductsService {
       image.product_id = newProduct.id;
       await this.imageService.createOne(image);
     });
-
-    // const campaign = await this.campaignService.findByName(
-    //   newProduct.campaign_name,
-    // );
-
-    // newProduct.campaign = campaign;
-    // delete newProduct.campaign_name;
 
     return newProduct;
   }

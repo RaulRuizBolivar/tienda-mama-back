@@ -1,3 +1,4 @@
+import { Campaign } from 'campaigns/entities/campaign.entity';
 import {
   BeforeInsert,
   Column,
@@ -8,7 +9,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Campaign } from './campaign.entity';
 import { Image } from './image.entity';
 
 @Entity({ name: 'products' })

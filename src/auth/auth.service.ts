@@ -52,9 +52,9 @@ export class AuthService {
 
     const token = await this.jwtService.signAsync(payload);
 
-    const email = user.email;
+    const { email, isAdmin } = user;
 
-    return { token, email };
+    return { token, email, isAdmin };
   }
 
   private getJWTConstants(): string {
