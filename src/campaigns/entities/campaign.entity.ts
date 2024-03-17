@@ -25,7 +25,7 @@ export class Campaign {
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   endDate: Date;
 
-  @OneToMany(() => Product, (product) => product.campaign_name, { eager: true })
+  @OneToMany(() => Product, (product) => product.campaign)
   products: Product[];
 
   // Logical remove

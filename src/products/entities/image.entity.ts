@@ -25,7 +25,7 @@ export class Image {
   product_id: number;
 
   // Logical remove
-  @DeleteDateColumn()
+  @DeleteDateColumn({ select: false })
   deletedAt: Date;
 
   @BeforeInsert()

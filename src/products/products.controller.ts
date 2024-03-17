@@ -10,8 +10,8 @@ import {
 import { isAdmin } from 'common/decorators/isAdmin.decorator';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { ProductType } from './enums/productType.enum';
 import { ProductsService } from './products.service';
-import { ProductType } from './types/productType.type';
 
 @Controller('products')
 export class ProductsController {
@@ -28,7 +28,7 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
-  @Get(':productType')
+  @Get('type/:productType')
   fintByProduct(@Param('productType') productType: ProductType) {
     return this.productsService.findByProductType(productType);
   }

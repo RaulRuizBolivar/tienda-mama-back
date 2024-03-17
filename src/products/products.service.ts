@@ -4,8 +4,8 @@ import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
+import { ProductType } from './enums/productType.enum';
 import { ImageService } from './image.service';
-import { ProductType } from './types/productType.type';
 
 @Injectable()
 export class ProductsService {
@@ -23,7 +23,9 @@ export class ProductsService {
       await this.imageService.createOne(image);
     });
 
-    return newProduct;
+    console.log(newProduct); // TODO delete
+
+    return await this.findOne(newProduct.id);
   }
 
   findAll() {
@@ -35,7 +37,7 @@ export class ProductsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} product`;
+    return this.productRepository.findOneBy({ id });
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {

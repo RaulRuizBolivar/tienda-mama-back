@@ -1,12 +1,19 @@
-import { Transform } from 'class-transformer';
-import { IsArray, IsNumber, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsNumber,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 import { CreateImageDto } from './create-image.dto';
 
 export class CreateProductDto {
   @IsString()
+  @MinLength(3)
   name: string;
 
   @IsString()
+  @IsOptional()
   description: string;
 
   @IsNumber()
@@ -18,7 +25,6 @@ export class CreateProductDto {
   @IsArray()
   images: CreateImageDto[];
 
-  @IsString()
-  @Transform((param) => param.value.toLowerCase())
-  campaign_name: string;
+  @IsNumber()
+  campaign: number;
 }
