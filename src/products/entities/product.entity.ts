@@ -28,12 +28,12 @@ export class Product {
   @Column({ type: 'float', nullable: false })
   price: number;
 
-  @OneToMany(() => Image, (image) => image.product_id)
+  @OneToMany(() => Image, (image) => image.product_id, { eager: true })
   images: Image[];
 
   @ManyToOne(() => Campaign, (campaign) => campaign.products)
-  @JoinColumn({ name: 'campaign_id' })
-  campaign_id: number;
+  @JoinColumn({ name: 'campaign_name', referencedColumnName: 'name' })
+  campaign_name: string;
 
   // Logical remove
   @DeleteDateColumn()

@@ -16,16 +16,16 @@ export class Campaign {
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @Column()
+  @Column({ unique: true })
   name: string;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   startDate: Date;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   endDate: Date;
 
-  @OneToMany(() => Product, (product) => product.campaign_id)
+  @OneToMany(() => Product, (product) => product.campaign_name, { eager: true })
   products: Product[];
 
   // Logical remove

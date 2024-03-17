@@ -18,8 +18,8 @@ export class CreateProductDto {
   @IsArray()
   images: CreateImageDto[];
 
-  @IsNumber()
-  campaign_id: number;
+  @IsString()
+  campaign_name: string;
 
   @IsOptional()
   campaign: Campaign;

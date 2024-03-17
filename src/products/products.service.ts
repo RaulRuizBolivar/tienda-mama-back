@@ -25,12 +25,12 @@ export class ProductsService {
       await this.imageService.createOne(image);
     });
 
-    const campaign = await this.campaignService.findById(
-      newProduct.campaign_id,
-    );
+    // const campaign = await this.campaignService.findByName(
+    //   newProduct.campaign_name,
+    // );
 
-    newProduct.campaign = campaign;
-    delete newProduct.campaign_id;
+    // newProduct.campaign = campaign;
+    // delete newProduct.campaign_name;
 
     return newProduct;
   }

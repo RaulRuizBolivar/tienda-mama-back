@@ -39,6 +39,11 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
+  @Get('campaign/:name')
+  findCampaignByName(@Param('name') name: string) {
+    return this.campaignService.findByName(name);
+  }
+
   @Get(':productType')
   fintByProduct(@Param('productType') productType: ProductType) {
     return this.productsService.findByProductType(productType);

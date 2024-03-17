@@ -18,4 +18,9 @@ export class CampaignService {
   async findById(id: number) {
     return await this.campaignRepository.findOneBy({ id });
   }
+
+  async findByName(name: string) {
+    console.log(name); // TODO delete
+    return await this.campaignRepository.findOne({ where: { name } });
+  }
 }
