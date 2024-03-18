@@ -29,8 +29,13 @@ export class ProductsController {
   }
 
   @Get('type/:productType')
-  fintByProduct(@Param('productType') productType: ProductType) {
+  findByProduct(@Param('productType') productType: ProductType) {
     return this.productsService.findByProductType(productType);
+  }
+
+  @Get('campaign/:id')
+  findByCampaign(@Param('id') campaign_id: string) {
+    return this.productsService.findByProductCampaignId(parseInt(campaign_id));
   }
 
   @Get(':id')

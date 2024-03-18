@@ -4,9 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { CampaignsModule } from './campaigns/campaigns.module';
 import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
-import { CampaignsModule } from './campaigns/campaigns.module';
 
 @Module({
   imports: [
@@ -19,7 +19,7 @@ import { CampaignsModule } from './campaigns/campaigns.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
       autoLoadEntities: true,
-      synchronize: true, // WARN Only for development (remove data from database)
+      //   synchronize: true, // WARN Only for development (remove data from database)
     }),
     UsersModule,
     AuthModule,

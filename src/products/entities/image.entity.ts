@@ -20,7 +20,9 @@ export class Image {
   @Column({ type: 'varchar' })
   url: string;
 
-  @ManyToOne(() => Product, (product) => product.images)
+  @ManyToOne(() => Product, (product) => product.images, {
+    onDelete: 'SET NULL',
+  })
   @JoinColumn({ name: 'product_id' })
   product_id: number;
 

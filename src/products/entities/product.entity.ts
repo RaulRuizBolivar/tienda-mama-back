@@ -1,5 +1,4 @@
 import { Campaign } from 'campaigns/entities/campaign.entity';
-import { ProductType } from 'products/enums/productType.enum';
 import {
   BeforeInsert,
   Column,
@@ -35,12 +34,12 @@ export class Product {
   @OneToMany(() => Image, (image) => image.product_id, { eager: true })
   images: Image[];
 
-  @ManyToOne(() => Campaign, (campaign) => campaign.id, { eager: true })
+  @ManyToOne(() => Campaign, (campaign) => campaign.id, {
+    eager: true,
+    onDelete: 'SET NULL',
+  })
   @JoinColumn({ name: 'campaign_id', referencedColumnName: 'id' })
   campaign: number; // Must be number, its a forain key
-
-  @Column()
-  type: ProductType;
 
   // Logical remove
   @DeleteDateColumn({ select: false })

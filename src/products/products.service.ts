@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOperator, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
@@ -34,6 +34,14 @@ export class ProductsService {
 
   findByProductType(productType: ProductType) {
     return `This action return all products of ${productType}`;
+  }
+
+  async findByProductCampaignId(campaign_id: number) {
+    // FindOperator was imprescindible to find well this endpoint
+    return await this.productRepository.find({
+      relations: ['campaign'],
+      where: { campaign: new FindOperator('equal', campaign_id) },
+    });
   }
 
   findOne(id: number) {
