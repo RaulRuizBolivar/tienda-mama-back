@@ -35,3 +35,6 @@ lerna-debug.log*
 
 # Environment variables
 .env
+
+# Migrations config
+orm.config.json
