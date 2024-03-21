@@ -36,11 +36,14 @@ export class CampaignsService {
   }
 
   async update(name: string, updateCampaignDto: UpdateCampaignDto) {
-    const updatedCampaign = await this.campaignRepository.update(
+    let updatedCampaign = await this.campaignRepository.findOneBy({ name });
+    updatedCampaign = Object.assign({}, updatedCampaign, updateCampaignDto);
+
+    const updatedResult = await this.campaignRepository.update(
       { name },
-      updateCampaignDto,
+      updatedCampaign,
     );
-    if (!updateCampaignDto)
+    if (updatedResult.affected === 0)
       throw new UnprocessableEntityException(
         'Campaign not possible to updated',
       );
