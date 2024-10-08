@@ -23,8 +23,6 @@ export class ProductsService {
       await this.imageService.createOne(image);
     });
 
-    console.log(newProduct); // TODO delete
-
     return await this.findOne(newProduct.id);
   }
 
