@@ -37,7 +37,7 @@ lerna-debug.log*
 .env
 
 # db
-/db/data-source.ts
+*data-source.ts
 
 #yarn
 yarn.lock
