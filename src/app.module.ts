@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { dataSourceOptions } from 'database/data-source';
+import { TypeOrmAsyncOptions } from 'database/typeOrmOptions';
 import { AuthModule } from './auth/auth.module';
 import { CampaignsModule } from './campaigns/campaigns.module';
 import { ProductsModule } from './products/products.module';
@@ -10,7 +10,7 @@ import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRootAsync(dataSourceOptions),
+    TypeOrmModule.forRootAsync(TypeOrmAsyncOptions),
     UsersModule,
     AuthModule,
     ProductsModule,

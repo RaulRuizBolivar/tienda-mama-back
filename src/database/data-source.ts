@@ -1,14 +1,18 @@
-import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
+import { ConfigService } from '@nestjs/config';
+import { config } from 'dotenv';
+import { DataSource } from 'typeorm';
 
-export const dataSourceOptions: TypeOrmModuleAsyncOptions = {
-  useFactory: () => ({
-    type: 'mysql',
-    host: process.env.DATABASE_HOST,
-    port: Number(process.env.DATABASE_PORT),
-    username: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_DATABASE,
-    entities: ['/src/**/*.entity.ts'],
-    migrations: ['/src/database/migrations/*.ts'],
-  }),
-};
+config();
+
+const configService = new ConfigService();
+
+export default new DataSource({
+  type: 'mysql',
+  host: configService.getOrThrow('DATABASE_HOST'),
+  port: Number(configService.getOrThrow('DATABASE_PORT')),
+  username: configService.getOrThrow('DATABASE_USERNAME'),
+  password: configService.getOrThrow('DATABASE_PASSWORD'),
+  database: configService.getOrThrow('DATABASE_DATABASE'),
+  entities: ['/src/**/*.entity.ts'],
+  migrations: ['/src/database/migrations/*.ts'],
+});
