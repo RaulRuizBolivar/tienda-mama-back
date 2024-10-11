@@ -18,10 +18,11 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "npm run build && npx typeorm -d dist/database/data-source.js",
-    "migration:generate": "npm run typeorm -- migration:generate ./src/database/migrations/",
-    "migration:run": "npm run typeorm -- migration:run",
-    "migration:revert": "npm run typeorm -- migration:revert",
+    "typeorm": "ts-node ./node_modules/typeorm/cli",
+    "migration:create": "npm run typeorm -- migration:create ./migrations/$npm_config_name",
+    "migration:generate": "npm run typeorm -- migration:generate /migrations/",
+    "migration:run": "npm run typeorm migration:run -- -d ./src/database/data-source.ts",
+    "migration:revert": "npm run typeorm migration:revert -- -d ./src/database/data-source.ts",
     "restart": "rm -rf ./node_modules yarn.lock package-lock.json && npm install"
   },
   "dependencies": {
@@ -35,6 +36,7 @@
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "dotenv": "^16.4.5",
     "mysql2": "^3.9.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
@@ -59,7 +61,7 @@
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.3",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.3"
   },
