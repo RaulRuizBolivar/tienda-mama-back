@@ -29,8 +29,7 @@ export const TypeOrmAsyncOptions: TypeOrmModuleAsyncOptions = {
       password: DATABASE_PASSWORD,
       database: DATABASE_DATABASE,
       autoLoadEntities: true,
-      // migrations: ['/src/database/migrations/*.ts'],
-      synchronize: IsProduction === 'true',
+      synchronize: IsProduction === 'false',
     };
   },
 };

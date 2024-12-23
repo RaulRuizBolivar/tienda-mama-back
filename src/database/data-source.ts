@@ -15,5 +15,6 @@ export default new DataSource({
   database: configService.getOrThrow('DATABASE_DATABASE'),
   entities: ['/src/**/*.entity.ts'],
   // migrations: ['/src/database/migrations/*.ts'],
-  synchronize: true,
+  synchronize:
+    configService.getOrThrow('isProduction') === 'true' ? false : true,
 });
