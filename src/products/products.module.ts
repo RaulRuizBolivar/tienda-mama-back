@@ -3,11 +3,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { jwtConfig } from 'auth/config/jwt.config';
 import { CampaignsModule } from 'campaigns/campaigns.module';
-import { Image } from './entities/image.entity';
+import { Image } from './images/entities/image.entity';
 import { Product } from './entities/product.entity';
-import { ImageService } from './image.service';
 import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
+import { ImageService } from './images/image.service';
 
 @Module({
   imports: [

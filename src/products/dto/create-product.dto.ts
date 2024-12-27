@@ -1,34 +1,3 @@
-// import {
-//   IsArray,
-//   IsNumber,
-//   IsOptional,
-//   IsString,
-//   MinLength,
-// } from 'class-validator';
-// import { CreateImageDto } from './create-image.dto';
-
-// export class CreateProductDto {
-//   @IsString()
-//   @MinLength(3)
-//   name: string;
-
-//   @IsString()
-//   @IsOptional()
-//   description: string;
-
-//   @IsNumber()
-//   price: number;
-
-//   @IsNumber()
-//   stock: number;
-
-//   @IsArray()
-//   images: CreateImageDto[];
-
-//   @IsNumber()
-//   campaign: number;
-// }
-
 import {
   IsNotEmpty,
   IsNumber,
@@ -36,8 +5,11 @@ import {
   ValidateIf,
   IsArray,
 } from 'class-validator';
-import { ProductType } from '../entities/product.entity';
-import { CreateImageDto } from './create-image.dto';
+import { CreateImageDto } from '../images/dto/create-image.dto';
+import { ProductType } from 'products/enums/productType.enum';
+import { amigurumiType } from 'products/enums/amigurumiType.enum';
+import { stickType } from 'products/enums/stickType.enum';
+
 export class CreateProductDto {
   @IsNotEmpty()
   name: string;
@@ -60,30 +32,50 @@ export class CreateProductDto {
   @IsEnum(ProductType)
   type: ProductType;
 
-  // Para productos Electronics
-  @ValidateIf((o) => o.type === ProductType.Electronics)
+  // Para productos Amigurumi
+  @ValidateIf((o) => o.type === ProductType.amigurumi)
   @IsNotEmpty()
-  warrantyPeriod?: string;
+  size?: number;
 
-  @ValidateIf((o) => o.type === ProductType.Electronics)
+  @ValidateIf((o) => o.type === ProductType.amigurumi)
   @IsNotEmpty()
-  brand?: string;
+  babyFriendly?: boolean;
 
-  // Para productos Clothing
-  @ValidateIf((o) => o.type === ProductType.Clothing)
+  @ValidateIf((o) => o.type === ProductType.amigurumi)
   @IsNotEmpty()
-  size?: string;
+  amigurumiMaterial?: 'Algodón';
 
-  @ValidateIf((o) => o.type === ProductType.Clothing)
+  @ValidateIf((o) => o.type === ProductType.amigurumi)
   @IsNotEmpty()
-  material?: string;
+  stuffed?: 'Hipoalergénico';
 
-  // Para productos Furniture
-  @ValidateIf((o) => o.type === ProductType.Furniture)
+  @ValidateIf((o) => o.type === ProductType.amigurumi)
   @IsNotEmpty()
-  dimensions?: string;
+  amigurumiType?: amigurumiType;
 
-  @ValidateIf((o) => o.type === ProductType.Furniture)
+  // Para productos Macrame
+  @ValidateIf((o) => o.type === ProductType.macrame)
   @IsNotEmpty()
-  furnitureMaterial?: string;
+  stick?: stickType;
+
+  @ValidateIf((o) => o.type === ProductType.macrame)
+  @IsNotEmpty()
+  ropeColor?: string; // TODO Cambiar a Color como entidad propia
+
+  @ValidateIf((o) => o.type === ProductType.macrame)
+  @IsNotEmpty()
+  macrameMaterial?: 'Algodón';
+
+  @ValidateIf((o) => o.type === ProductType.macrame)
+  @IsNotEmpty()
+  caliber: 3;
+
+  // Para productos pirograbado
+  // @ValidateIf((o) => o.type === ProductType.pirograbado)
+  // @IsNotEmpty()
+  // wood?: Wood;
+
+  // @ValidateIf((o) => o.type === ProductType.pirograbado)
+  // @IsNotEmpty()
+  // clientImages?: Image[];
 }
