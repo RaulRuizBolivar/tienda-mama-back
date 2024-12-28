@@ -77,5 +77,5 @@ export class CreateProductDto {
 
   // @ValidateIf((o) => o.type === ProductType.pirograbado)
   // @IsNotEmpty()
-  // clientImages?: Image[];
+  // clientImages?: ClientImage[];
 }
