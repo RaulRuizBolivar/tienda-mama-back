@@ -5,7 +5,7 @@ import {
   ValidateIf,
   IsArray,
 } from 'class-validator';
-import { CreateImageDto } from '../images/dto/create-image.dto';
+import { CreateImageProductDto } from '../images/dto/create-imageProduct.dto';
 import { ProductType } from 'products/enums/productType.enum';
 import { amigurumiType } from 'products/enums/amigurumiType.enum';
 import { stickType } from 'products/enums/stickType.enum';
@@ -24,7 +24,7 @@ export class CreateProductDto {
   price: number;
 
   @IsArray()
-  images: CreateImageDto[];
+  images: CreateImageProductDto[];
 
   @IsNumber()
   campaign: number;

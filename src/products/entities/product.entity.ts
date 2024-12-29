@@ -9,10 +9,10 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Image } from '../images/entities/image.entity';
 import { stickType } from '../enums/stickType.enum';
 import { amigurumiType } from '../enums/amigurumiType.enum';
 import { ProductType } from '../enums/productType.enum';
+import { ProductImage } from 'products/images/entities/productImage.entity';
 
 @Entity({ name: 'products' })
 export class Product {
@@ -44,11 +44,11 @@ export class Product {
   })
   type: ProductType;
 
-  @OneToMany(() => Image, (image) => image.product_id, {
+  @OneToMany(() => ProductImage, (image) => image.product_id, {
     eager: true,
     nullable: true,
   })
-  images: Image[];
+  images: ProductImage[];
 
   @ManyToOne(() => Campaign, (campaign) => campaign.id, {
     eager: true,

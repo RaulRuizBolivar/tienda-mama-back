@@ -1,17 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Image } from './entities/image.entity';
-import { CreateImageDto } from './dto/create-image.dto';
+import { CreateImageProductDto } from './dto/create-imageProduct.dto';
+import { ProductImage } from './entities/productImage.entity';
+import { isAdmin } from 'common/decorators/isAdmin.decorator';
 
 @Injectable()
 export class ImageService {
   constructor(
-    @InjectRepository(Image)
-    private readonly imageRepository: Repository<Image>,
+    @InjectRepository(ProductImage)
+    private readonly imageRepository: Repository<ProductImage>,
   ) {}
 
-  async createOne(createImageDto: CreateImageDto) {
-    return await this.imageRepository.save(createImageDto);
+  @isAdmin()
+  async createOne(createImageProductDto: CreateImageProductDto) {
+    return await this.imageRepository.save(createImageProductDto);
   }
 }
