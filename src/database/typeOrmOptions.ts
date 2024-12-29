@@ -1,14 +1,35 @@
 import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 
 export const TypeOrmAsyncOptions: TypeOrmModuleAsyncOptions = {
-  useFactory: () => ({
-    type: 'mysql',
-    host: process.env.DATABASE_HOST,
-    port: Number(process.env.DATABASE_PORT),
-    username: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_DATABASE,
-    entities: ['/src/**/*.entity.ts'],
-    migrations: ['/src/database/migrations/*.ts'],
-  }),
+  useFactory: () => {
+    const {
+      DATABASE_HOST,
+      DATABASE_PORT,
+      DATABASE_USERNAME,
+      DATABASE_PASSWORD,
+      DATABASE_DATABASE,
+      IsProduction,
+    } = process.env;
+
+    if (
+      !DATABASE_HOST ||
+      !DATABASE_PORT ||
+      !DATABASE_USERNAME ||
+      !DATABASE_PASSWORD ||
+      !DATABASE_DATABASE
+    ) {
+      throw new Error('Missing necessary database environment variables');
+    }
+
+    return {
+      type: 'mysql',
+      host: DATABASE_HOST,
+      port: Number(DATABASE_PORT),
+      username: DATABASE_USERNAME,
+      password: DATABASE_PASSWORD,
+      database: DATABASE_DATABASE,
+      autoLoadEntities: true,
+      synchronize: IsProduction === 'false',
+    };
+  },
 };

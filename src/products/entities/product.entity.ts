@@ -9,11 +9,14 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Image } from './image.entity';
+import { stickType } from '../enums/stickType.enum';
+import { amigurumiType } from '../enums/amigurumiType.enum';
+import { ProductType } from '../enums/productType.enum';
+import { ProductImage } from 'products/images/entities/productImage.entity';
 
 @Entity({ name: 'products' })
 export class Product {
-  @PrimaryGeneratedColumn({})
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
@@ -31,17 +34,29 @@ export class Product {
   @Column({ type: 'float', nullable: false })
   price: number;
 
-  @OneToMany(() => Image, (image) => image.product_id, { eager: true })
-  images: Image[];
+  @Column({ default: '' })
+  label: string;
+
+  @Column({
+    type: 'enum',
+    enum: ProductType,
+    nullable: false,
+  })
+  type: ProductType;
+
+  @OneToMany(() => ProductImage, (image) => image.product_id, {
+    eager: true,
+    nullable: true,
+  })
+  images: ProductImage[];
 
   @ManyToOne(() => Campaign, (campaign) => campaign.id, {
     eager: true,
     onDelete: 'SET NULL',
   })
   @JoinColumn({ name: 'campaign_id', referencedColumnName: 'id' })
-  campaign: number; // Must be number, its a forain key
+  campaign: number;
 
-  // Logical remove
   @DeleteDateColumn({ select: false })
   deletedAt: Date;
 
@@ -49,4 +64,48 @@ export class Product {
   beforeInsertActions() {
     this.createdAt = new Date(Date.now());
   }
+
+  // Campos específicos para Amigurumi
+  @Column({ nullable: true })
+  size: number;
+
+  @Column({ nullable: true })
+  babyFriendlg: boolean;
+
+  @Column({ nullable: true })
+  amigurumiMaterial: 'Algodón';
+
+  @Column({ nullable: true })
+  stuffed: 'Hipoalergénico';
+
+  @Column({ nullable: true })
+  amigurumiType: amigurumiType;
+
+  // Campos específicos para Macrame
+  @Column({ nullable: true })
+  stick: stickType;
+
+  @Column({ nullable: true })
+  ropeColor: string; // TODO Cambiar a Color como entidad propia
+
+  @Column({ nullable: true })
+  macrameMaterial: 'Algodón';
+
+  @Column({ nullable: true })
+  caliber: 3;
+
+  // Campos específicos para Pirograbado
+  // @ManyToMany(() => Wood, (wood) => wood.product_id, {
+  //   eager: true,
+  //   nullable: true,
+  // })
+  // wood: Wood;
+  // FIXME - Añadir relación con la tabla de madera
+
+  // @OneToMany(() => ClientImage, (clientImage) => clientImage.product_id, {
+  //   eager: true,
+  //   nullable: true,
+  // })
+  // clientImages: Image[];
+  // FIXME - Añadir relación con la tabla de imágenes de clientes
 }

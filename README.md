@@ -19,31 +19,43 @@
     <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Getting Started
 
-```bash
-$ npm install
-```
+Follow these steps to set up and run the project:
 
-## Running the app
+1. Clone the repository:
+    ```bash
+    git clone <repository-url>
+    cd tienda-mama-back
+    ```
 
-```bash
-# development
-$ npm run start
+2. Install the dependencies:
+    ```bash
+    npm install
+    ```
 
-# watch mode
-$ npm run start:dev
+3. Create a `.env` file from the provided `.example.env` file and fill in the required environment variables:
+    ```bash
+    cp .example.env .env
+    # Edit the .env file with your preferred editor and fill in the values
+    ```
 
-# production mode
-$ npm run start:prod
-```
+4. Run the application:
+    ```bash
+    # development
+    npm run start
+
+    # watch mode
+    npm run start:dev
+
+    # production mode
+    npm run start:prod
+    ```
 
 ## Test
 

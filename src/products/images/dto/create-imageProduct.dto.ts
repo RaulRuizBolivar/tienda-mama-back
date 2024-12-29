@@ -1,6 +1,6 @@
 import { IsNumber, IsString } from 'class-validator';
 
-export class CreateImageDto {
+export class CreateImageProductDto {
   @IsString()
   url: string;
 

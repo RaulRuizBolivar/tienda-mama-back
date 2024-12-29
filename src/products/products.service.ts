@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOperator, Repository } from 'typeorm';
+import { Repository, FindOperator } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 import { ProductType } from './enums/productType.enum';
-import { ImageService } from './image.service';
+import { ImageService } from './images/image.service';
+import { removeNullFields } from 'common/utils/removeNullFields.util';
 
 @Injectable()
 export class ProductsService {
@@ -18,16 +19,19 @@ export class ProductsService {
   async create(createProductDto: CreateProductDto) {
     const newProduct = await this.productRepository.save(createProductDto);
 
-    createProductDto.images.forEach(async (image) => {
-      image.product_id = newProduct.id;
-      await this.imageService.createOne(image);
-    });
+    await Promise.all(
+      createProductDto.images.map(async (image) => {
+        image.product_id = newProduct.id;
+        await this.imageService.createOne(image);
+      }),
+    );
 
-    return await this.findOne(newProduct.id);
+    return this.findOne(newProduct.id);
   }
 
-  findAll() {
-    return this.productRepository.find();
+  async findAll() {
+    const products = await this.productRepository.find();
+    return products.map((product) => removeNullFields(product));
   }
 
   findByProductType(productType: ProductType) {
@@ -42,8 +46,9 @@ export class ProductsService {
     });
   }
 
-  findOne(id: number) {
-    return this.productRepository.findOneBy({ id });
+  async findOne(id: number) {
+    const product = await this.productRepository.findOneBy({ id });
+    return removeNullFields(product);
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
