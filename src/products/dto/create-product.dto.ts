@@ -5,7 +5,7 @@ import {
   ValidateIf,
   IsArray,
 } from 'class-validator';
-import { CreateImageProductDto } from '../images/dto/create-imageProduct.dto';
+import { CreateImageProductDto } from '../../images/dto/create-imageProduct.dto';
 import { ProductType } from 'products/enums/productType.enum';
 import { amigurumiType } from 'products/enums/amigurumiType.enum';
 import { stickType } from 'products/enums/stickType.enum';

@@ -12,7 +12,7 @@ import {
 import { stickType } from '../enums/stickType.enum';
 import { amigurumiType } from '../enums/amigurumiType.enum';
 import { ProductType } from '../enums/productType.enum';
-import { ProductImage } from 'products/images/entities/productImage.entity';
+import { ProductImage } from 'images/entities/productImage.entity';
 
 @Entity({ name: 'products' })
 export class Product {

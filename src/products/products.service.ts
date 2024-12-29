@@ -5,7 +5,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 import { ProductType } from './enums/productType.enum';
-import { ImageService } from './images/image.service';
+import { ImageService } from '../images/image.service';
 import { removeNullFields } from 'common/utils/removeNullFields.util';
 
 @Injectable()
