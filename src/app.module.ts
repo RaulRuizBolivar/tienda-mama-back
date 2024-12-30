@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { CampaignsModule } from './campaigns/campaigns.module';
 import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
+import { WoodsModule } from 'woods/woods.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     ProductsModule,
     CampaignsModule,
+    WoodsModule,
   ],
 })
 export class AppModule {}

@@ -4,10 +4,11 @@ import { ProductImage } from './entities/productImage.entity';
 import { ImageService } from './image.service';
 import { jwtConfig } from 'auth/config/jwt.config';
 import { JwtModule } from '@nestjs/jwt';
+import { WoodImage } from './entities/woodImage.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ProductImage]),
+    TypeOrmModule.forFeature([ProductImage, WoodImage]),
     JwtModule.registerAsync(jwtConfig),
   ],
   providers: [ImageService],

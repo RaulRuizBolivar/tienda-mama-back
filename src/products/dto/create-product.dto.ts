@@ -4,19 +4,22 @@ import {
   IsEnum,
   ValidateIf,
   IsArray,
+  IsString,
 } from 'class-validator';
-import { CreateImageProductDto } from '../../images/dto/create-imageProduct.dto';
+import { CreateImageProductDto } from '../../images/dto/imageProduct/create-imageProduct.dto';
 import { ProductType } from 'products/enums/productType.enum';
 import { amigurumiType } from 'products/enums/amigurumiType.enum';
 import { stickType } from 'products/enums/stickType.enum';
 
 export class CreateProductDto {
+  @IsString()
   @IsNotEmpty()
   name: string;
 
   @IsNumber()
   stock: number;
 
+  @IsString()
   @IsNotEmpty()
   description: string;
 

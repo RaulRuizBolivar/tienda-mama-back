@@ -22,7 +22,7 @@ export class ProductsService {
     await Promise.all(
       createProductDto.images.map(async (image) => {
         image.product_id = newProduct.id;
-        await this.imageService.createOne(image);
+        await this.imageService.createOneProductImage(image);
       }),
     );
 
@@ -35,6 +35,7 @@ export class ProductsService {
   }
 
   findByProductType(productType: ProductType) {
+    // TODO - Implement this method
     return `This action return all products of ${productType}`;
   }
 
