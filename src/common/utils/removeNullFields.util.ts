@@ -1,5 +1,8 @@
 // This method removes all null fields from an object
 export function removeNullFields(obj: any): any {
+  if (obj instanceof Date) {
+    return obj;
+  }
   if (Array.isArray(obj)) {
     return obj.map((item) => this.removeNullFields(item));
   } else if (obj && typeof obj === 'object') {
